@@ -1,36 +1,29 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
-import javax.servlet.http.HttpServlet;
+import ru.akirakozov.sd.refactoring.dao.ProductDao;
+import ru.akirakozov.sd.refactoring.product.Product;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-import static ru.akirakozov.sd.refactoring.servlet.Utils.updateResponseByText;
 
 /**
  * @author akirakozov
  */
-public class AddProductServlet extends HttpServlet {
+public class AddProductServlet extends AbstractServlet {
+
+    public AddProductServlet(ProductDao productDao) {
+        super(productDao);
+    }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
         String name = request.getParameter("name");
         long price = Long.parseLong(request.getParameter("price"));
 
-        try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
-            String sql = "INSERT INTO PRODUCT " +
-                    "(NAME, PRICE) VALUES (\"" + name + "\"," + price + ")";
-            Statement stmt = c.createStatement();
-            stmt.executeUpdate(sql);
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        updateResponseByText(response, "OK", false);
+        productDao.insert(new Product(name, price));
+        response.getWriter().println("OK");
     }
 }
