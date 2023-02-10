@@ -35,7 +35,7 @@ public class QueryServletTest extends AbstractTest {
 
         printer.flush();
         assertThat(stringWriter.toString()).isEqualToIgnoringNewLines(
-                "<html><body><h1>Product with max price: </h1>" + "iphone6\t300</br>" + "</body></html>"
+                "<html><body><h1>Product with max price:</h1>" + "iphone6\t300</br>" + "</body></html>"
         );
     }
 
@@ -51,7 +51,7 @@ public class QueryServletTest extends AbstractTest {
 
         printer.flush();
         assertThat(stringWriter.toString()).isEqualToIgnoringNewLines(
-                "<html><body><h1>Product with min price: </h1>" + "iphone6\t300</br>" + "</body></html>"
+                "<html><body><h1>Product with min price:</h1>" + "iphone6\t300</br>" + "</body></html>"
         );
     }
 
@@ -67,7 +67,7 @@ public class QueryServletTest extends AbstractTest {
 
         printer.flush();
         assertThat(stringWriter.toString()).isEqualToIgnoringNewLines(
-                "<html><body>Summary price: " + "300" + "</body></html>"
+                "<html><body><h1>Summary price:</h1>" + "300" + "</body></html>"
         );
     }
 
@@ -83,7 +83,7 @@ public class QueryServletTest extends AbstractTest {
 
         printer.flush();
         assertThat(stringWriter.toString()).isEqualToIgnoringNewLines(
-                "<html><body>Number of products: " + "1" + "</body></html>"
+                "<html><body><h1>Number of products:</h1>" + "1" + "</body></html>"
         );
     }
 
