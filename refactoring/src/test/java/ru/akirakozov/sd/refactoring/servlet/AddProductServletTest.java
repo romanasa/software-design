@@ -1,6 +1,5 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -18,7 +17,7 @@ public class AddProductServletTest extends AbstractTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        servlet = new AddProductServlet();
+        servlet = new AddProductServlet(productDao);
     }
     @Test
     public void testAddProductServlet() throws IOException {
